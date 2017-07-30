@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=BynCoin
+Comment=BynCoin P2P Cryptocurrency
+Comment[ru]=BynCoin, P2P криптовалюта
+Comment[fr]=BynCoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=BynCoin, eşten eşe kriptografik sanal para birimi
+Exec=/usr/bin/byncoin-qt
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/byncoin80.xpm
+MimeType=x-scheme-handler/byncoin;
+Categories=Office;

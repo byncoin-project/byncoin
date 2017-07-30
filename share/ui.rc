@@ -1,4 +1,4 @@
-novacoin               ICON    "pixmaps/novacoin.ico"
+byncoin               ICON    "pixmaps/byncoin.ico"
 
 #include "wx/msw/wx.rc"
 

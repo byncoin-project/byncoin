@@ -1,4 +1,4 @@
-// Copyright (c) 2013-2016 The NovaCoin developers
+// Copyright (c) 2013-2016 The BynCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or https://opensource.org/licenses/mit-license.php
 #ifndef NOVACOIN_NTP_H

@@ -1,11 +1,11 @@
 [Unit]
-Description=Novacoin daemon serivce
+Description=Byncoin daemon serivce
 After=network.target
 
 [Service]
 Type=simple
-User=novacoin
-ExecStart=/opt/novacoin/novacoind
+User=byncoin
+ExecStart=/opt/byncoin/byncoind
 
 [Install]
 WantedBy=multi-user.target

@@ -34,7 +34,7 @@ class CNode;
 // Global state
 //
 
-static const unsigned int MAX_BLOCK_SIZE = 1000000;
+static const unsigned int MAX_BLOCK_SIZE = 2000000;
 static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
 static const unsigned int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE/50;
 static const unsigned int MAX_ORPHAN_TRANSACTIONS = MAX_BLOCK_SIZE/100;
@@ -45,7 +45,7 @@ static const int64_t MIN_RELAY_TX_FEE = CENT/50;
 
 static const int64_t MAX_MONEY = std::numeric_limits<int64_t>::max();
 static const int64_t MAX_MINT_PROOF_OF_WORK = 100 * COIN;
-static const int64_t MAX_MINT_PROOF_OF_STAKE = 1 * COIN;
+static const int64_t MAX_MINT_PROOF_OF_STAKE = 250 * COIN;
 static const int64_t MIN_TXOUT_AMOUNT = CENT/100;
 
 
@@ -55,8 +55,8 @@ static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20
 // Maximum number of script-checking threads allowed
 static const int MAX_SCRIPTCHECK_THREADS = 16;
 
-static const uint256 hashGenesisBlock("0x00000a060336cbb72fe969666d337b87198b1add2abaa59cca226820b32933a4");
-static const uint256 hashGenesisBlockTestNet("0x000c763e402f2436da9ed36c7286f62c3f6e5dbafce9ff289bd43d7459327eb");
+static const uint256 hashGenesisBlock("0x00000cda179f87af052923248b4cf71671c85cfa12e45fc09de99c308bb58f82");
+static const uint256 hashGenesisBlockTestNet("0x000003fc9397f1f39e432ae8180500caa3a10e100442298a46acc7c0f8a4b117");
 
 inline int64_t PastDrift(int64_t nTime)   { return nTime - 2 * nOneHour; } // up to 2 hours from the past
 inline int64_t FutureDrift(int64_t nTime) { return nTime + 2 * nOneHour; } // up to 2 hours from the future
@@ -958,7 +958,7 @@ public:
     // ppcoin: entropy bit for stake modifier if chosen by modifier
     unsigned int GetStakeEntropyBit(unsigned int nHeight) const
     {
-        // Protocol switch to support p2pool at novacoin block #9689
+        // Protocol switch to support p2pool at byncoin block #9689
         if (nHeight >= 9689 || fTestNet)
         {
             // Take last bit of block hash as entropy bit
@@ -968,7 +968,7 @@ public:
             return nEntropyBit;
         }
 
-        // Before novacoin block #9689 - get from pregenerated table
+        // Before byncoin block #9689 - get from pregenerated table
         int nBitNum = nHeight & 0xFF;
         int nItemNum = nHeight / 0xFF;
 

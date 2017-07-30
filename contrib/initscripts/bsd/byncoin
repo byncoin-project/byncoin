@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# PROVIDE: byncoin
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+#
+# Add the following lines to /etc/rc.conf.local or /etc/rc.conf
+# to enable this service:
+#
+# byncoin_enable (bool): Set to NO by default. Set this variable to YES if you want to enable byncoin service.
+# byncoin_config (path): Set to /usr/local/etc/byncoin.conf by default.
+# byncoin_user:  The user account byncoin daemon runs as. It uses 'root' user by default.
+# byncoin_group: The group account byncoin daemon runs as. It uses 'wheel' group by default.
+# byncoin_datadir (str): Default to "/var/db/byncoin". Base data directory.
+
+. /etc/rc.subr
+
+name=byncoin
+rcvar=byncoin_enable
+
+: ${byncoin_enable:=NO}
+: ${byncoin_config=/usr/local/etc/byncoin.conf}
+: ${byncoin_datadir=/var/db/byncoin}
+: ${byncoin_user="root"}
+: ${byncoin_group="wheel"}
+
+required_files=${byncoin_config}
+command=/usr/local/bin/byncoind
+byncoin_chdir=${byncoin_datadir}
+pidfile="${byncoin_datadir}/byncoind.pid"
+stop_cmd=byncoin_stop
+command_args="-conf=${byncoin_config} -datadir=${byncoin_datadir} -daemon -pid=${pidfile}"
+start_precmd="${name}_prestart"
+
+byncoin_create_datadir()
+{
+	echo "Creating data directory"
+	eval mkdir -p ${byncoin_datadir}
+	[ $? -eq 0 ] && chown -R ${byncoin_user}:${byncoin_group} ${byncoin_datadir}
+}
+
+byncoin_prestart()
+{
+	if [ ! -d "${byncoin_datadir}/." ]; then
+		byncoin_create_datadir || return 1
+	fi
+}
+
+byncoin_requirepidfile()
+{
+	if [ ! "0`check_pidfile ${pidfile} ${command}`" -gt 1 ]; then
+		echo "${name} not running? (check $pidfile)."
+		exit 1
+	fi
+}
+
+byncoin_stop()
+{
+    byncoin_requirepidfile
+
+	echo "Stopping ${name}."
+	eval ${command} -conf=${byncoin_config} -datadir=${byncoin_datadir} stop
+	wait_for_pids ${rc_pid}
+}
+
+load_rc_config $name
+run_rc_command "$1"

@@ -1,0 +1,2 @@
+debian/bin/byncoind usr/bin
+src/byncoind usr/lib/byncoin

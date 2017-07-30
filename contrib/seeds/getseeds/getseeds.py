@@ -32,25 +32,25 @@ from socket import error as socket_error
 def confFile():
     folder = ''
     if platform.system() == 'Windows':
-        folder = os.path.join(os.path.join(os.environ['APPDATA'], 'NovaCoin'))
+        folder = os.path.join(os.path.join(os.environ['APPDATA'], 'BynCoin'))
     else:
         if platform.system() == 'Darwin':
-            folder = os.path.expanduser('~/Library/Application Support/NovaCoin/')
+            folder = os.path.expanduser('~/Library/Application Support/BynCoin/')
         else:
-            folder = os.path.expanduser('~/.novacoin')
+            folder = os.path.expanduser('~/.byncoin')
 
-    return os.path.join(folder, 'novacoin.conf')
+    return os.path.join(folder, 'byncoin.conf')
 
 conf_path = confFile()
 if not os.path.exists(conf_path):
-    parser.error('''Novacoin configuration file not found. Manually enter your RPC password.\r\n'''
+    parser.error('''Byncoin configuration file not found. Manually enter your RPC password.\r\n'''
         '''If you actually haven't created a configuration file, you should create one at %s with the text like this:\r\n'''
         '''\r\n'''
         '''server=1\r\n'''
         '''rpcuser=yourname\r\n'''
         '''rpcpassword=%x\r\n'''
         '''\r\n'''
-        '''Keep that password secret! After creating the file, restart Novacoin.''' % (conf_path, random.randrange(2**128)))
+        '''Keep that password secret! After creating the file, restart Byncoin.''' % (conf_path, random.randrange(2**128)))
 
 conf = open(conf_path, 'rb').read()
 contents = {}
@@ -89,7 +89,7 @@ for node in json.loads(data.decode()):
         access.addnode(node, 'add')
     except socket_error as e:
         if e.errno == errno.ECONNREFUSED:
-            print ('Unable to communicate with Novacoin RPC')
+            print ('Unable to communicate with Byncoin RPC')
         break
     except JSONRPCException as e:
         if e.code == -23:

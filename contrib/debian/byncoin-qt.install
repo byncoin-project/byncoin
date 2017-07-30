@@ -1,0 +1,5 @@
+byncoin-qt usr/bin
+share/pixmaps/byncoin32.xpm usr/share/pixmaps
+share/pixmaps/byncoin80.xpm usr/share/pixmaps
+debian/byncoin-qt.desktop usr/share/applications
+debian/byncoin-qt.protocol usr/share/kde4/services/
